@@ -21,6 +21,11 @@ class Capoeirista(models.Model):
     user = models.ForeignKey(User, null=True)
     created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
 
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('capoeirista')
+        verbose_name_plural = _('capoeiristas')
+
     def __unicode__(self):
         return u'%s' % self.name
 
@@ -32,6 +37,11 @@ class Event(models.Model):
     date = models.DateTimeField(_(u'data'))
     capoeirista = models.ForeignKey(Capoeirista)
     created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = _('evento')
+        verbose_name_plural = _('eventos')
 
     def __unicode__(self):
         return u'%s' % self.title
