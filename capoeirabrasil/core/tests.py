@@ -12,7 +12,7 @@ class CapoeiristaModelTest(TestCase):
         user = mommy.make(User)
 
         self.obj = Capoeirista(
-            name='Nome',
+            name=u'José Conceição',
             phone='219999-9999',
             email='mestredoidao@capoeirabrasil.com.br',
             graduation='FP',
@@ -32,3 +32,9 @@ class CapoeiristaModelTest(TestCase):
         """
         self.obj.save()
         self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_unicode(self):
+        """
+        Unicode returns the model name
+        """
+        self.assertEqual(self.obj.name, unicode(self.obj))

@@ -21,6 +21,5 @@ class Capoeirista(models.Model):
     user = models.ForeignKey(User, null=True)
     created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
 
-
-
-
+    def __unicode__(self):
+        return u'%s' % self.name
