@@ -1,11 +1,14 @@
 # coding: utf-8
 
+import os
 from datetime import datetime
 from datetime import date
+from django.core.files import File
 from django.test import TestCase
 from django.contrib.auth.models import User
 from model_mommy import mommy
-from capoeirabrasil.core.models import Capoeirista, Event
+from capoeirabrasil.settings import BASE_DIR
+from capoeirabrasil.core.models import Capoeirista, Event, Photo
 
 
 class EventModelTest(TestCase):
@@ -38,6 +41,22 @@ class EventModelTest(TestCase):
         Unicode returns the model name
         """
         self.assertEqual(self.obj.title, unicode(self.obj))
+
+
+class PhotoModelTest(TestCase):
+    def setUp(self):
+        event = mommy.make(Event)
+
+        self.obj = Photo(
+            event=event,
+            title='Titulo',
+            description='Descricao',
+            photo=File(open(os.path.join(BASE_DIR, 'core/testdata/cloud.png')))
+        )
+
+    def test_create(self):
+        self.obj.save()
+        self.assertEqual(1, self.obj.pk)
 
 
 class CapoeiristaModelTest(TestCase):

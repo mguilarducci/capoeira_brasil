@@ -1,7 +1,12 @@
 # coding: utf-8
 
 from django.contrib import admin
-from capoeirabrasil.core.models import Capoeirista, Event
+from capoeirabrasil.core.models import Capoeirista, Event, Photo
+
+
+class PhotoInline(admin.TabularInline):
+    model = Photo
+    extra = 1
 
 
 class CapoeiristaAdmin(admin.ModelAdmin):
@@ -9,6 +14,7 @@ class CapoeiristaAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(admin.ModelAdmin):
+    inlines = [PhotoInline]
     list_display = ('title', 'date', 'capoeirista', 'created_at')
 
 admin.site.register(Capoeirista, CapoeiristaAdmin)
