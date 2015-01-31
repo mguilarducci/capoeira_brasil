@@ -7,27 +7,40 @@ from django.contrib.auth.models import User
 
 class Capoeirista(models.Model):
     GRADUATIONS = (
-        ('ME', _('Mestre')),
-        ('FP', _('Formado (Preta)')),
-        ('FM', _('Formado (Marrom)')),
-        ('PVR', _('Professor (Verde e Roxa)')),
-        ('IA', _('Instrutor (Azul)')),
+        (0, _('Mestre')),
+        (1, _('Formado')),
+        (2, _('Formado')),
+        (3, _('Professor')),
+        (4, _('Instrutor')),
     )
 
+    BELTS = {
+        0: '-',
+        1: _('Preta'),
+        2: _('Marrom'),
+        3: _('Verde e Roxa'),
+        4: _('Azul')
+    }
+
     name = models.CharField(_(u'nome'), max_length=255)
+    nickname = models.CharField(_(u'apelido'), max_length=50)
     phone = models.CharField(_(u'telefone'), max_length=30)
     email = models.EmailField(_(u'email'), blank=True)
-    graduation = models.CharField(_(u'graduação'), max_length=3, choices=GRADUATIONS)
+    graduation = models.IntegerField(_(u'graduação'), max_length=3, choices=GRADUATIONS)
     user = models.ForeignKey(User, null=True)
     created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['nickname']
         verbose_name = _('capoeirista')
         verbose_name_plural = _('capoeiristas')
 
     def __unicode__(self):
-        return u'%s' % self.name
+        return u'%s %s (%s)' % (self.GRADUATIONS[self.graduation][1], self.nickname, self.belt)
+
+    @property
+    def belt(self):
+        return self.BELTS[self.graduation]
 
 
 class Event(models.Model):

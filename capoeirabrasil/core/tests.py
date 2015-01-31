@@ -46,9 +46,10 @@ class CapoeiristaModelTest(TestCase):
 
         self.obj = Capoeirista(
             name=u'José Conceição',
+            nickname=u'Vudu',
             phone='219999-9999',
             email='mestredoidao@capoeirabrasil.com.br',
-            graduation='FP',
+            graduation=1,
             user=user
         )
 
@@ -70,4 +71,7 @@ class CapoeiristaModelTest(TestCase):
         """
         Unicode returns the model name
         """
-        self.assertEqual(self.obj.name, unicode(self.obj))
+        self.assertEqual(u'Formado Vudu (Preta)', unicode(self.obj))
+
+    def test_belt(self):
+        self.assertEqual('Preta', self.obj.belt)

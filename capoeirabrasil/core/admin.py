@@ -5,7 +5,7 @@ from capoeirabrasil.core.models import Capoeirista, Event
 
 
 class CapoeiristaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'graduation', 'phone', 'email', 'created_at')
+    list_display = ('nickname', 'graduation', 'belt', 'phone', 'email', 'created_at')
 
 
 class EventAdmin(admin.ModelAdmin):
