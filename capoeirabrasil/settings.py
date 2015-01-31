@@ -58,7 +58,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 )
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'PinkEva'
+    'ADMIN_NAME': 'Capoeira Brasil'
 }
 
 ROOT_URLCONF = 'capoeirabrasil.urls'
