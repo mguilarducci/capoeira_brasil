@@ -23,3 +23,15 @@ class Capoeirista(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+
+class Event(models.Model):
+
+    title = models.CharField(_(u'título'), max_length=100)
+    description = models.TextField(_(u'descrição'))
+    date = models.DateTimeField(_(u'data'))
+    capoeirista = models.ForeignKey(Capoeirista)
+    created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
