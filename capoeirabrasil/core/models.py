@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 
 class Capoeirista(models.Model):
@@ -17,6 +18,8 @@ class Capoeirista(models.Model):
     phone = models.CharField(_(u'telefone'), max_length=30)
     email = models.EmailField(_(u'email'), blank=True)
     graduation = models.CharField(_(u'graduação'), max_length=3, choices=GRADUATIONS)
+    user = models.ForeignKey(User, null=True)
+    created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
 
 
 
