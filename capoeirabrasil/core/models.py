@@ -27,7 +27,7 @@ class Capoeirista(models.Model):
     phone = models.CharField(_(u'telefone'), max_length=30)
     email = models.EmailField(_(u'email'), blank=True)
     graduation = models.IntegerField(_(u'graduação'), max_length=3, choices=GRADUATIONS)
-    user = models.ForeignKey(User, null=True)
+    user = models.OneToOneField(User)
     created_at = models.DateTimeField(_('criado em'), auto_now_add=True)
 
     class Meta:
